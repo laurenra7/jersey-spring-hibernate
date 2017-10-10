@@ -29,7 +29,7 @@ git clone https://github.com/laurenra7/jersey-spring-hibernate.git
 ### Set it up
 
 Set the JDBC connect string and the username and password properties in
-[src/main/webapp/WEB-INF/spring-hibernate-jersey2.xml](https://github.com/laurenra7/jersey-spring-hibernate/blob/master/src/main/webapp/WEB-INF/spring-hibernate-jersey2.xml)
+**src/main/webapp/WEB-INF/spring-hibernate-jersey2.xml**
 
 ```
     <property name="url" value="jdbc:mysql://db_server:3306/my_database" />
