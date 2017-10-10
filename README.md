@@ -46,7 +46,8 @@ mvn clean package
 ### Deploy it
 
 For example, for a Tomcat 7 servlet container, copy **target/jersey-spring-hibernate.war**
-to the Tomcat **webapp** directory where it should unpackage and deploy it.
+to the Tomcat **webapp** directory where it should automatically unpackage
+and deploy.
 
 ### Endpoints
 
