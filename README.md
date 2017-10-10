@@ -60,4 +60,15 @@ and deploy.
 | PUT         | Update book (JSON or XML)             | /jersey-spring-hibernate/rest/bookservice/updatebook   |
 | DELETE      | Delete a book (id = 3)                | /jersey-spring-hibernate/rest/bookservice/deletebook/3 |
 
+### Book JSON and XML
+
+```
+{
+  "bookId": 10,
+  "bookName": "Where The Wild Things Are",
+  "author": "Maurice Sendak",
+  "category": "Childrens"
+}
+```
+
 ### Build POJOs from XML schema
