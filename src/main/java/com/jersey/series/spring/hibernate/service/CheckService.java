@@ -13,16 +13,16 @@ import org.springframework.stereotype.Component;
  * Created by laurenra on 10/9/17.
  */
 @Component
-@Path("/test")
-public class FoxResource {
+@Path("/")
+public class CheckService {
 
-    private static final Logger log = LoggerFactory.getLogger(FoxResource.class);
+    private static final Logger log = LoggerFactory.getLogger(CheckService.class);
 
     @GET
-    @Path("/fox")
+    @Path("/check")
     @Produces(MediaType.TEXT_PLAIN)
     public String getFox() {
-        log.info("Get a fox...");
-        return "got a fox.";
+        log.info("Web application health check.");
+        return "The web application is alive.";
     }
 }

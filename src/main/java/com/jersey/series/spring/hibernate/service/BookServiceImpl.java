@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 //import in.benchresources.cdm.book.BookType;
 
 @Component
-@Path("/bookservice")
+@Path("/books")
 public class BookServiceImpl implements IBookService {
 
 	private static final Logger log = LoggerFactory.getLogger(BookServiceImpl.class);
@@ -37,7 +37,7 @@ public class BookServiceImpl implements IBookService {
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/addbook
 	@POST
-	@Path("addbook")
+	@Path("add")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public String createOrSaveBookInfo(BookType bookType) {
@@ -58,7 +58,7 @@ public class BookServiceImpl implements IBookService {
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/getbook/1
 	@GET
-	@Path("getbook/{id}")
+	@Path("get/{id}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public BookType getBookInfo(@PathParam("id") int bookId) {
@@ -78,7 +78,7 @@ public class BookServiceImpl implements IBookService {
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/updatebook
 	@PUT
-	@Path("updatebook")
+	@Path("update")
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public String updateBookInfo(BookType bookType) {
@@ -96,7 +96,7 @@ public class BookServiceImpl implements IBookService {
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/deletebook/5
 	@DELETE
-	@Path("deletebook/{id}")
+	@Path("delete/{id}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public String deleteBookInfo(@PathParam("id") int bookId) {
@@ -109,7 +109,7 @@ public class BookServiceImpl implements IBookService {
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/getallbook
 	@GET
-	@Path("getallbook")
+	@Path("getall")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public BookListType getAllBookInfo() {
