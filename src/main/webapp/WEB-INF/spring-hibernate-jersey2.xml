@@ -47,12 +47,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<!--<property name="url" value="jdbc:mysql://localhost:3306/atmdev" />-->
-		<!-- Can connect with Docker container name (atm.db), Docker service name in , or Docker Links name-->
-		<!--<property name="url" value="jdbc:mysql://172.19.0.2:3306/atmdev" />-->
-		<property name="url" value="jdbc:mysql://db_server:3306/atmdev" />
-		<!--<property name="url" value="jdbc:mysql://container_mysql:3306/atmdev" />-->
-		<!--<property name="url" value="jdbc:mysql://atm.db:3306/atmdev" />-->
+		<property name="url" value="jdbc:mysql://db_server:3306/my_database" />
 		<property name="username" value="my_user" />
 		<property name="password" value="my_password" />
 	</bean>
