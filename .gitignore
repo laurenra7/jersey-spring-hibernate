@@ -16,5 +16,6 @@ target/
 
 # Other
 #*.wsdl
+generated/
 private*.tar
 test-cases.txt
