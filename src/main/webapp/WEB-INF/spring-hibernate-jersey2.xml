@@ -29,6 +29,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.jersey.series.spring.hibernate.model.Book</value>
+				<value>com.jersey.series.spring.hibernate.model.User</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -44,8 +45,8 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://db_server:3306/my_database" />
-		<property name="username" value="my_user" />
-		<property name="password" value="my_password" />
+		<property name="url" value="jdbc:mysql://db_server:3306/atmdev" />
+		<property name="username" value="atmroot" />
+		<property name="password" value="bluefox" />
 	</bean>
 </beans>

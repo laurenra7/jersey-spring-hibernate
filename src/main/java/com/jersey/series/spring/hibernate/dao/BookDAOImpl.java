@@ -65,7 +65,7 @@ public class BookDAOImpl implements BookDAO {
 	public List<Book> getAllBookInfo() {
 
 		// get all books info from database
-		List<Book> lstBook = sessionFactory.getCurrentSession().createCriteria(Book.class).list();
-		return lstBook;
+		List<Book> bookList = sessionFactory.getCurrentSession().createCriteria(Book.class).list();
+		return bookList;
 	}
 }

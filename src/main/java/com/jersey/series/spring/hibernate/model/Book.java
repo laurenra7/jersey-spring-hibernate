@@ -7,22 +7,22 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BOOK")
+@Table(name = "books")
 public class Book {
 
 	// member variables
 	@Id 
 	@GeneratedValue
-	@Column(name = "BOOK_ID")
+	@Column(name = "book_id")
 	private int bookId;
 
-	@Column(name= "BOOK_NAME")
+	@Column(name= "book_name")
 	private String bookName;
 
-	@Column(name= "AUTHOR")
+	@Column(name= "author")
 	private String author;
 
-	@Column(name= "CATEGORY")
+	@Column(name= "category")
 	private String category;
 
 	// getters & setters

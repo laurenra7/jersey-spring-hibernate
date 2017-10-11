@@ -1,8 +1,5 @@
 package com.jersey.series.spring.hibernate.service;
 
-//import in.benchresources.cdm.book.BookListType;
-//import in.benchresources.cdm.book.BookType;
-
 import com.jersey.series.spring.hibernate.db.resources.BookListType;
 import com.jersey.series.spring.hibernate.db.resources.BookType;
 

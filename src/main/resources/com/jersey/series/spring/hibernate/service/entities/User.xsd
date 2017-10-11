@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://benchresources.in/cdm/Book"
+	xmlns:tns="http://benchresources.in/cdm/Book"
+	elementFormDefault="qualified">
+
+	<!-- User object with 3 attributes -->
+	<xsd:element name="UserType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="userId" type="xsd:int" />
+				<xsd:element name="userName" type="xsd:string" />
+				<xsd:element name="emailAddress" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- List of users -->
+	<xsd:element name="UserListType">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="tns:UserType" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
