@@ -1,4 +1,11 @@
 # Jersey 2 / Spring 4 / Hibernate 5 / MySQL 5 example
+**Note:** this uses the newer JAVA
+[JPA EntityManager](https://www.tutorialspoint.com/jpa/jpa_entity_managers.htm)
+to manage database transactions and the newer
+[JavaConfig with annotations](https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html)
+instead of XML to set up Spring Beans.
+
+
 This is an example of using these frameworks and libraries to build a
 web application backed by a MySQL database.
 
