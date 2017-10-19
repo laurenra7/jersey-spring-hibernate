@@ -1,4 +1,15 @@
 # Jersey 2 / Spring 4 / Hibernate 5 / MySQL 5 example
+**Note:** this uses the older
+[Hibernate SessionFactory](http://www.baeldung.com/hibernate-4-spring) to
+manage database sessions with
+[XML Schema-based Spring Beans configuration](https://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/xsd-config.html).
+For an example using the newer JAVA
+[JPA EntityManager](https://www.tutorialspoint.com/jpa/jpa_entity_managers.htm)
+and [JavaConfig with annotations](https://docs.spring.io/spring-javaconfig/docs/1.0.0.m3/reference/html/creating-bean-definitions.html)
+instead of XML, see the
+[JavaConfigAndEntityManager](https://github.com/laurenra7/jersey-spring-hibernate/tree/JavaConfigAndEntityManager)
+branch.
+
 This is an example of using these frameworks and libraries to build a
 web application backed by a MySQL database.
 
