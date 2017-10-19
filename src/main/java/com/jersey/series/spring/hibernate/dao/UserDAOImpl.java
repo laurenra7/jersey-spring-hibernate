@@ -2,59 +2,55 @@ package com.jersey.series.spring.hibernate.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import com.jersey.series.spring.hibernate.model.User;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@PersistenceContext
+	private EntityManager entityManager;
 
 	@Override
 	@Transactional
 	public String addUser(User user) {
 
 		// insert into database & return Id (primary_key)
-		int userId = (Integer) sessionFactory.getCurrentSession().save(user);
-		return "User saved successfully with ID " + userId;
+		// Hibernate's default strategy for @GeneratedValue on User appears
+		// to be GenerationType.IDENTITY so this is inserted and committed
+		// to the database in this transaction, not lazily later on.
+		entityManager.persist(user);
+		return "User saved";
 	}
 
 	@Override
 	@Transactional
 	public User getUser(int userId) {
 
-		User user = (User) sessionFactory.getCurrentSession().get(User.class, userId);
+		User user = (User) entityManager.find(User.class, userId);
 		return user;
 	}
 
 	@Override
 	@Transactional
-	public String updateUser(User user) {
+	public String updateUser(User updatedUser) {
 
 		// update database with user information and return success msg
-		sessionFactory.getCurrentSession().update(user);
+		User newUser = entityManager.merge(updatedUser);
 		return "User information updated successfully";
 	}
 
 	@Override
 	@Transactional
-	public String deleteUser(User user) {
+	public String deleteUser(int userId) {
 
 		// delete user and return success msg
-		sessionFactory.getCurrentSession().delete(user);
-		return "User with Id " + user.getUserId() +  " deleted successfully";
+		entityManager.remove((User) entityManager.find(User.class, userId));
+		return "User with Id " + userId + " deleted successfully";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -62,8 +58,9 @@ public class UserDAOImpl implements UserDAO {
 	@Transactional
 	public List<User> getAllUsers() {
 
-		// get all books info from database
-		List<User> userList = sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		// get all users from database
+		List<User> userList = entityManager.createQuery("select a from User a").getResultList();
+
 		return userList;
 	}
 }

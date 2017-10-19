@@ -2,8 +2,11 @@ package com.jersey.series.spring.hibernate.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,23 +15,26 @@ import com.jersey.series.spring.hibernate.model.Book;
 @Repository("bookDAO")
 public class BookDAOImpl implements BookDAO {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	private static final Logger log = LoggerFactory.getLogger(BookDAOImpl.class);
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+	@PersistenceContext(unitName = "LOCAL_PERSISTENCE")
+	private EntityManager entityManager;
 
 	@Override
 	@Transactional
 	public String insertNewBookInfo(Book book) {
 
-		// inserts into database & return bookId (primary_key)
-		int bookId = (Integer) sessionFactory.getCurrentSession().save(book);
+		log.info("attempting to persist book " + book.toString());
+
+		// Because Book has a GenerationType.IDENTITY, this inserts into
+		// database and commits right away. Other types would result in lazy
+		// commit (which could be forced with .flush() or .commit()).
+
+		entityManager.persist(book);
+//		entityManager.flush();
+		log.info("successfully persisted book. Was it committed to the database? Trying to get ID...");
+		int bookId = book.getBookId();
+		log.info("book id = " + bookId);
 		return "Book information saved successfully with Book_ID " + bookId;
 	}
 
@@ -37,26 +43,48 @@ public class BookDAOImpl implements BookDAO {
 	public Book getBookInfo(int bookId) {
 
 		// retrieve book object based on the id supplied in the formal argument
-		Book book = (Book) sessionFactory.getCurrentSession().get(Book.class, bookId);
+		Book book = (Book) entityManager.find(Book.class, bookId);
 		return book;
 	}
 
 	@Override
 	@Transactional
-	public String updateBookInfo(Book updateBook) {
+	public String updateBookInfo(Book updatedBook) {
 
 		// update database with book information and return success msg
-		sessionFactory.getCurrentSession().update(updateBook);
+
+		/** If differences are minimal, just getting the book and updating
+		 * the field (or a couple fields) is faster than using merge.
+		 */
+
+//		Book book = (Book) entityManager.find(Book.class, Integer.valueOf(updatedBook.getBookId()));
+//		book.setBookName(updatedBook.getBookName());
+//		book.setAuthor(updatedBook.getAuthor());
+//		book.setCategory(updatedBook.getCategory());
+
+		/** If there are lots of fields, it's easier to just merge the
+		 * updated (detached, new) book with the persisted book and let
+		 * the EntityManager take care of checking and updating the fields.
+ 		 */
+
+		Book newBook = entityManager.merge(updatedBook);
+
 		return "Book information updated successfully";
 	}
 
 	@Override
 	@Transactional
-	public String removeBookInfo(Book removeBook) {
+	public String removeBookInfo(int bookId) {
 
 		// delete book information and return success msg
-		sessionFactory.getCurrentSession().delete(removeBook);
-		return "Book information with Book_ID " + removeBook.getBookId() +  " deleted successfully";
+
+//		Book book = (Book) entityManager.find(Book.class, bookId);
+//		entityManager.remove(book);
+//		return "Book with id " + book.getBookId() + " deleted.";
+
+		entityManager.remove((Book) entityManager.find(Book.class, bookId));
+		return "Book deleted";
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -65,7 +93,10 @@ public class BookDAOImpl implements BookDAO {
 	public List<Book> getAllBookInfo() {
 
 		// get all books info from database
-		List<Book> bookList = sessionFactory.getCurrentSession().createCriteria(Book.class).list();
+//		List<Book> bookList = sessionFactory.getCurrentSession().createCriteria(Book.class).list();
+
+//		entityManager.createQuery("select * from books");
+		List<Book> bookList = entityManager.createQuery("select a from Book a").getResultList();
 		return bookList;
 	}
 }

@@ -9,6 +9,6 @@ public interface UserDAO {
 	public String addUser(User user);
 	public User getUser(int userId);
 	public String updateUser(User user);
-	public String deleteUser(User user);
+	public String deleteUser(int userId);
 	public List<User> getAllUsers();
 }

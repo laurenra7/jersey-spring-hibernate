@@ -10,43 +10,7 @@
 	<!-- to activate annotations in beans already registered in the ApplicationContext -->
 	<context:annotation-config />
 
-	<!-- scans packages to find and register beans within the application context -->
-	<context:component-scan base-package="com.jersey.series.spring.hibernate" />
+	<!-- Spring beans configured using Java Config annotations in this class -->
+	<bean id="appSpringConfig" class="com.jersey.series.spring.hibernate.config.AppSpringConfig" />
 
-	<!-- turn on spring transaction annotation -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<!-- Transaction Manager -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<!-- Session Factory -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>com.jersey.series.spring.hibernate.model.Book</value>
-				<value>com.jersey.series.spring.hibernate.model.User</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
-	</bean>
-
-	<!-- dataSource configuration -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://db_server:3306/atmdev" />
-		<property name="username" value="atmroot" />
-		<property name="password" value="bluefox" />
-	</bean>
 </beans>

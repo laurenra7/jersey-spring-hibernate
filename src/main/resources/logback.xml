@@ -71,8 +71,8 @@
     <!--
     | Setup default log level to INFO
     +-->
-    <!--<root level="INFO">-->
-    <root level="DEBUG">
+    <root level="INFO">
+    <!--<root level="DEBUG">-->
         <appender-ref ref="MYLOGFILE" />
         <!--<appender-ref ref="MYSTDOUT" />-->
     </root>

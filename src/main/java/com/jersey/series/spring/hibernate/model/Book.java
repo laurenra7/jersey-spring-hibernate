@@ -3,6 +3,7 @@ package com.jersey.series.spring.hibernate.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,7 +13,12 @@ public class Book {
 
 	// member variables
 	@Id 
-	@GeneratedValue
+//	@GeneratedValue
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_id_generator")
+//    @SequenceGenerator(name = "books_id_generator", sequenceName = "books_id_seq", allocationSize = 50)
+
 	@Column(name = "book_id")
 	private int bookId;
 
@@ -49,5 +55,15 @@ public class Book {
 	}
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Book{" +
+				"bookId=" + bookId +
+				", bookName='" + bookName + '\'' +
+				", author='" + author + '\'' +
+				", category='" + category + '\'' +
+				'}';
 	}
 }

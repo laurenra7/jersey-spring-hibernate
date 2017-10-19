@@ -21,9 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//import in.benchresources.cdm.book.BookListType;
-//import in.benchresources.cdm.book.BookType;
-
 @Component
 @Path("/users")
 public class UserServiceImpl implements IUserService {
@@ -95,10 +92,8 @@ public class UserServiceImpl implements IUserService {
 	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
 	public String deleteUser(@PathParam("id") int userId) {
 
-		// delete book info & return SUCCESS message
-		User user = new User();
-		user.setUserId(userId);
-		return userDAO.deleteUser(user);
+		// delete user info & return SUCCESS message
+		return userDAO.deleteUser(userId);
 	}
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/getallbook
@@ -112,7 +107,7 @@ public class UserServiceImpl implements IUserService {
 
 		List<User> userList = userDAO.getAllUsers();
 
-		// create a object of type BookListType which takes book objects in its list
+		// create a object of type UserListType which takes book objects in its list
 		UserListType userListType = new UserListType();
 
 		for(User user : userList){

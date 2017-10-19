@@ -21,9 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//import in.benchresources.cdm.book.BookListType;
-//import in.benchresources.cdm.book.BookType;
-
 @Component
 @Path("/books")
 public class BookServiceImpl implements IBookService {
@@ -102,9 +99,8 @@ public class BookServiceImpl implements IBookService {
 	public String deleteBookInfo(@PathParam("id") int bookId) {
 
 		// delete book info & return SUCCESS message
-		Book removeBook = new Book();
-		removeBook.setBookId(bookId);
-		return bookDAO.removeBookInfo(removeBook);
+
+		return bookDAO.removeBookInfo(bookId);
 	}
 
 	// http://localhost:8080/Jersey-Spring-Hibernate/rest/bookservice/getallbook
@@ -118,7 +114,7 @@ public class BookServiceImpl implements IBookService {
 
 		List<Book> lstBook = bookDAO.getAllBookInfo();
 
-		// create a object of type BookListType which takes book objects in its list
+		// create object of type BookListType which takes book objects in its list
 		BookListType bookListType = new BookListType();
 
 		for(Book book : lstBook){

@@ -9,6 +9,6 @@ public interface BookDAO {
 	public String insertNewBookInfo(Book addBook);
 	public Book getBookInfo(int bookId);
 	public String updateBookInfo(Book updateBook);
-	public String removeBookInfo(Book removeBook);
+	public String removeBookInfo(int bookId);
 	public List<Book> getAllBookInfo();
 }
