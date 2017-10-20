@@ -37,10 +37,10 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	@Transactional
-	public String updateUser(User updatedUser) {
+	public String updateUser(User user) {
 
 		// update database with user information and return success msg
-		User newUser = entityManager.merge(updatedUser);
+		User updatedUser = entityManager.merge(user);
 		return "User information updated successfully";
 	}
 
